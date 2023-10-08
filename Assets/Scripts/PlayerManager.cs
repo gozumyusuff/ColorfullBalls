@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     public Transform path;
     public ParticleSystem CollideParticle;
     public ParticleSystem airEffect;
-    
+
     private Camera mainCam;
     private Rigidbody rb;
     private Collider _collider;
@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
     public int blueCount = 0;
     public int greenCount = 0;
 
-    bool isSkillActive = false;
+    bool isShieldActive = false;
 
     void Start()
     {
@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && MenuManager.MenuManagerInstance.GameState)
         {
             moveTheBall = true;
-           
+
 
             Plane newPlan = new Plane(Vector3.up, 0f);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -113,7 +113,7 @@ public class PlayerManager : MonoBehaviour
 
         if (other.CompareTag("obstacle"))
         {
-            if (!isSkillActive)
+            if (!isShieldActive)
             {
                 gameObject.SetActive(false);
                 MenuManager.MenuManagerInstance.GameState = false;
@@ -158,11 +158,11 @@ public class PlayerManager : MonoBehaviour
                     MenuManager.MenuManagerInstance.menuElement[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You Lose";
                 }
             }
-           
+
             BallRenderer.material = other.GetComponent<Renderer>().material;
             var NewParticle = Instantiate(CollideParticle, transform.position, Quaternion.identity);
             NewParticle.GetComponent<Renderer>().material = other.GetComponent<Renderer>().material;
-                        
+
             other.gameObject.SetActive(false);
             currentScore += 5;
             MenuManager.MenuManagerInstance.menuElement[1].GetComponent<TextMeshProUGUI>().text = "" + currentScore;
@@ -181,10 +181,10 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        isSkillActive = true;
+        isShieldActive = true;
         Shield.SetActive(true);
         yield return new WaitForSeconds(3);
-        isSkillActive= false;
+        isShieldActive = false;
         Shield.SetActive(false);
     }
 
@@ -193,7 +193,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("path") )
+        if (other.CompareTag("path"))
         {
             Debug.Log("exit");
             rb.isKinematic = _collider.isTrigger = false;
@@ -202,9 +202,9 @@ public class PlayerManager : MonoBehaviour
 
             var airEffectMain = airEffect.main;
             airEffectMain.simulationSpeed = 10f;
-           
+
         }
-    
+
     }
 
     private void OnCollisionEnter(Collision other)
@@ -212,8 +212,8 @@ public class PlayerManager : MonoBehaviour
         if (other.collider.CompareTag("path"))
         {
             ColEnter();
-        }        
-        
+        }
+
     }
 
     void ColEnter()
@@ -225,7 +225,7 @@ public class PlayerManager : MonoBehaviour
         pathSpeed = 28f;
 
         var airEffectMain = airEffect.main;
-        airEffectMain.simulationSpeed = 4f;       
+        airEffectMain.simulationSpeed = 4f;
     }
 
 }
