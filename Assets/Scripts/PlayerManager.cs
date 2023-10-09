@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
 
     public int currentScore = 0;
     public bool isTouchedBlue = false;
+    public bool isTouchedGreen = false;
 
     private Vector3 initialScale;
 
@@ -136,6 +137,7 @@ public class PlayerManager : MonoBehaviour
             {
                 Debug.Log("blue entered");
                 ballMesh.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
+                isTouchedBlue = true;
                 blueCount++; //sayaç
                 if (blueCount > 1)
                 {
@@ -149,6 +151,7 @@ public class PlayerManager : MonoBehaviour
             {
                 Debug.Log("green entered");
                 ballMesh.localScale += new Vector3(0.3f, 0.3f, 0.3f);
+                isTouchedGreen = true;
                 greenCount++; //sayaç
                 if (greenCount > 1)
                 {
