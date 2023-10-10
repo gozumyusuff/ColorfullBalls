@@ -24,8 +24,6 @@ public class PlayerManager : MonoBehaviour
     public Transform ballMesh;
     public GameObject Shield;
 
-    public AudioSource bgmusic;
-
 
     public Material[] Colors;
 
@@ -39,6 +37,10 @@ public class PlayerManager : MonoBehaviour
     public int greenCount = 0;
 
     bool isShieldActive = false;
+
+    public bool isBlueBall = false;
+    public bool isGreenBall = false;
+
 
     void Start()
     {
@@ -127,7 +129,7 @@ public class PlayerManager : MonoBehaviour
                 PlayerPrefs.SetInt("score", currentScore);
 
             }
-        }
+        }       
 
 
         if (other.CompareTag("Ball"))
@@ -138,7 +140,12 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("blue entered");
                 ballMesh.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
                 isTouchedBlue = true;
-                blueCount++; //sayaç
+                isBlueBall = true;
+                blueCount++;
+                greenCount = 0;
+                
+               
+
                 if (blueCount > 1)
                 {
                     gameObject.SetActive(false);
@@ -153,6 +160,7 @@ public class PlayerManager : MonoBehaviour
                 ballMesh.localScale += new Vector3(0.3f, 0.3f, 0.3f);
                 isTouchedGreen = true;
                 greenCount++; //sayaç
+                blueCount = 0;
                 if (greenCount > 1)
                 {
                     gameObject.SetActive(false);
@@ -174,7 +182,7 @@ public class PlayerManager : MonoBehaviour
         if (other.CompareTag("Shield"))
         {
             Debug.Log("shield entered");
-            ballMesh.localScale = initialScale;
+            //ballMesh.localScale = initialScale;
             blueCount = 0;
             greenCount = 0;
             StartCoroutine(Countdown());
