@@ -183,8 +183,8 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.Log("shield entered");
             //ballMesh.localScale = initialScale;
-            blueCount = 0;
-            greenCount = 0;
+            //blueCount = 0;
+            //greenCount = 0;
             StartCoroutine(Countdown());
         }
 
