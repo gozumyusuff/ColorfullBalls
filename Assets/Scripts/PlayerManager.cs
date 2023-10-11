@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    private Transform ball;
     private Vector3 startMousePos, startBallPos;
     private bool moveTheBall;
     [Range(0f, 1f)] public float maxSpeed;
@@ -21,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody rb;
     private Collider _collider;
     private Renderer BallRenderer;
+    private Transform ball;
     public Transform ballMesh;
     public GameObject Shield;
 
@@ -37,10 +37,7 @@ public class PlayerManager : MonoBehaviour
     public int greenCount = 0;
 
     bool isShieldActive = false;
-
-    public bool isBlueBall = false;
-    public bool isGreenBall = false;
-
+   
 
     void Start()
     {
@@ -138,9 +135,8 @@ public class PlayerManager : MonoBehaviour
             if (other.GetComponent<Renderer>().sharedMaterial == Colors[0])
             {
                 Debug.Log("blue entered");
-                ballMesh.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
+                //ballMesh.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
                 isTouchedBlue = true;
-                isBlueBall = true;
                 blueCount++;
                 greenCount = 0;
                 
@@ -157,9 +153,9 @@ public class PlayerManager : MonoBehaviour
             else if (other.GetComponent<Renderer>().sharedMaterial == Colors[1])
             {
                 Debug.Log("green entered");
-                ballMesh.localScale += new Vector3(0.3f, 0.3f, 0.3f);
+                //ballMesh.localScale += new Vector3(0.3f, 0.3f, 0.3f);
                 isTouchedGreen = true;
-                greenCount++; //sayaç
+                greenCount++; 
                 blueCount = 0;
                 if (greenCount > 1)
                 {
