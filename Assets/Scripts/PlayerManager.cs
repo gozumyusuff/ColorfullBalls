@@ -169,7 +169,6 @@ public class PlayerManager : MonoBehaviour
             BallRenderer.material = other.GetComponent<Renderer>().material;
             var NewParticle = Instantiate(CollideParticle, transform.position, Quaternion.identity);
             NewParticle.GetComponent<Renderer>().material = other.GetComponent<Renderer>().material;
-
             other.gameObject.SetActive(false);
             currentScore += 5;
             MenuManager.MenuManagerInstance.menuElement[1].GetComponent<TextMeshProUGUI>().text = "" + currentScore;
