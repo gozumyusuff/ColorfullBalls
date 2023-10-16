@@ -1,8 +1,6 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -57,6 +55,7 @@ public class PlayerManager : MonoBehaviour
         {
             moveTheBall = true;
 
+            
 
             Plane newPlan = new Plane(Vector3.up, 0f);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
